@@ -1,220 +1,123 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
+
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>
-  File: README
-  
-    &mdash; Documentation by YARD 0.7.2
-  
-</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ripple: Riak on Rails : A rich Ruby client for Riak, Basho's distributed database" />
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
-
-<script type="text/javascript" charset="utf-8">
-  relpath = '';
-  if (relpath != '') relpath += '/';
-</script>
-
-  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
-
-  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
-
-
+    <title>Ripple: Riak on Rails</title>
   </head>
+
   <body>
-    <script type="text/javascript" charset="utf-8">
-      if (window.top.frames.main) document.body.className = 'frames';
-    </script>
-    
-    <div id="header">
-      <div id="menu">
-  
-    <a href="_index.html" title="Index">Index</a> &raquo; 
-    <span class="title">File: README</span>
-  
-  
-  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
-</div>
 
-      <div id="search">
-  
-    <a id="class_list_link" href="#">Class List</a>
-  
-    <a id="method_list_link" href="#">Method List</a>
-  
-    <a id="file_list_link" href="#">File List</a>
-  
-</div>
-      <div class="clear"></div>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/bkerley/ripple">View on GitHub</a>
+
+          <h1 id="project_title">Ripple: Riak on Rails</h1>
+          <h2 id="project_tagline">A rich Ruby client for Riak, Basho's distributed database</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/bkerley/ripple/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/bkerley/ripple/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
     </div>
-    
-    <iframe id="search_frame"></iframe>
-    
-    <div id="content"><div id='filecontents'><h1>ripple</h1>
-<p>ripple is a rich Ruby toolkit for Riak, Basho&#8217;s distributed database. It consists of three gems:</p>
-<ul>
-	<li><code>riak-client</code> (<code>Riak</code> namespace) contains a basic wrapper around typical operations, including bucket manipulation, object <span class="caps">CRUD</span>, link-walking, and map-reduce.</li>
-	<li><code>ripple</code> (<code>Ripple</code> namespace) contains an ActiveModel-compatible modeling layer that is inspired by ActiveRecord, DataMapper, and MongoMapper.</li>
-	<li><code>riak-sessions</code> contains session stores for Rack and Rails 3 applications.</li>
-</ul>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<code>ripple</code>: Riak Document Models <a href="http://travis-ci.org/basho/ripple"><img src="https://secure.travis-ci.org/basho/ripple.png" alt="Build Status"></a>
+</h1>
+
+<p><code>ripple</code> is a rich Ruby modeling layer for Riak, Basho's distributed
+database that contains an ActiveModel-based document abstraction which
+is inspired by ActiveRecord, DataMapper, and MongoMapper.</p>
+
 <h2>Dependencies</h2>
-<p><code>riak-client</code> requires i18n and either json or yajl-ruby. For higher performance on <span class="caps">HTTP</span> requests, install the &#8216;curb&#8217; or &#8216;excon&#8217; gems. The cache store implementation requires ActiveSupport 3 or later.</p>
-<p><code>ripple</code> requires Ruby 1.8.7 or later and versions 3 or above of ActiveModel and ActiveSupport (and their dependencies, including i18n).</p>
-<p><code>riak-sessions</code> requires Rack (any version &gt; 1.0), and Rails 3.0 if you want the Rails-specific session store.</p>
-<p>Development dependencies are handled with bundler. Install bundler (<code>gem install bundler</code>) and run this command in each sub-project to get started:</p>
-<pre class="code">$ bundle install</pre><p>Run the RSpec suite using <code>bundle exec</code>:</p>
-<pre class="code">$ bundle exec rake spec</pre><h2>Basic Example</h2>
-<pre class="code"><span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>riak</span><span class='tstring_end'>'</span></span>
 
-<span class='comment'># Create a client interface
-</span><span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Riak</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span>
+<p><code>ripple</code> requires Ruby 1.8.7 or later and versions 3 or above of
+ActiveModel and ActiveSupport (and their dependencies, including
+i18n). Naturally, it also depends on the <code>riak-client</code> gem to connect
+to Riak.</p>
 
-<span class='comment'># Create a client interface that uses Excon
-</span><span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Riak</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:http_backend</span> <span class='op'>=&gt;</span> <span class='symbol'>:Excon</span><span class='rparen'>)</span>
+<p>Development dependencies are handled with bundler. Install bundler
+(<code>gem install bundler</code>) and run this command in each sub-project to
+get started:</p>
 
-<span class='comment'># Create a client that uses Protocol Buffers
-</span><span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Riak</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:protocol</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pbc</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<div class="highlight"><pre><span class="nv">$ </span>bundle install
+</pre></div>
 
-<span class='comment'># Retrieve a bucket
-</span><span class='id bucket'>bucket</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id bucket'>bucket</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>doc</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>  <span class='comment'># a Riak::Bucket
-</span>
-<span class='comment'># Get an object from the bucket
-</span><span class='id object'>object</span> <span class='op'>=</span> <span class='id bucket'>bucket</span><span class='period'>.</span><span class='id get'>get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>index.html</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>   <span class='comment'># a Riak::RObject
-</span>
-<span class='comment'># Change the object's data and save
-</span><span class='id object'>object</span><span class='period'>.</span><span class='id data'>data</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;html&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;</span><span class='tstring_end'>&quot;</span></span>
-<span class='id object'>object</span><span class='period'>.</span><span class='id store'>store</span>
+<p>Run the RSpec suite using <code>bundle exec</code>:</p>
 
-<span class='comment'># Reload an object you already have
-</span><span class='id object'>object</span><span class='period'>.</span><span class='id reload'>reload</span>                  <span class='comment'># Works if you have the key and vclock, using conditional GET
-</span><span class='id object'>object</span><span class='period'>.</span><span class='id reload'>reload</span> <span class='symbol'>:force</span> <span class='op'>=&gt;</span> <span class='kw'>true</span>   <span class='comment'># Reloads whether you have the vclock or not
-</span>
-<span class='comment'># Access more like a hash, client[bucket][key]
-</span><span class='id client'>client</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>doc</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>index.html</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>   <span class='comment'># the Riak::RObject
-</span>
-<span class='comment'># Create a new object
-</span><span class='id new_one'>new_one</span> <span class='op'>=</span> <span class='const'>Riak</span><span class='op'>::</span><span class='const'>RObject</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id bucket'>bucket</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application.js</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-<span class='id new_one'>new_one</span><span class='period'>.</span><span class='id content_type'>content_type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application/javascript</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># You must set the content type.
-</span><span class='id new_one'>new_one</span><span class='period'>.</span><span class='id data'>data</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alert('Hello, World!')</span><span class='tstring_end'>&quot;</span></span>
-<span class='id new_one'>new_one</span><span class='period'>.</span><span class='id store'>store</span></pre><h2>Map-Reduce Example</h2>
-<pre class="code">
+<div class="highlight"><pre><span class="nv">$ </span>bundle <span class="nb">exec </span>rake spec
+</pre></div>
 
-<span class='comment'># Assuming you've already instantiated a client, get the album titles for The Beatles
-</span><span class='id results'>results</span> <span class='op'>=</span> <span class='const'>Riak</span><span class='op'>::</span><span class='const'>MapReduce</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id client'>client</span><span class='rparen'>)</span><span class='period'>.</span>
-                <span class='id add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>artists</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Beatles</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
-                <span class='id link'>link</span><span class='lparen'>(</span><span class='symbol'>:bucket</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>albums</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
-                <span class='id map'>map</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>function(v){ return [JSON.parse(v.values[0].data).title]; }</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:keep</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id run'>run</span>
+<h2>Document Model Examples</h2>
 
-<span class='id p'>p</span> <span class='id results'>results</span> <span class='comment'># =&gt; [&quot;Please Please Me&quot;, &quot;With The Beatles&quot;, &quot;A Hard Day's Night&quot;, 
-</span>          <span class='comment'>#     &quot;Beatles For Sale&quot;, &quot;Help!&quot;, &quot;Rubber Soul&quot;,
-</span>          <span class='comment'>#     &quot;Revolver&quot;, &quot;Sgt. Pepper's Lonely Hearts Club Band&quot;, &quot;Magical Mystery Tour&quot;, 
-</span>          <span class='comment'>#     &quot;The Beatles&quot;, &quot;Yellow Submarine&quot;, &quot;Abbey Road&quot;, &quot;Let It Be&quot;]</span></pre><h2>Riak Search Examples</h2>
-<p>For more information about Riak Search, see <a href="http://wiki.basho.com/display/RIAK/Riak+Search">the Basho wiki</a>.</p>
-<pre class="code">
-<span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>riak/search</span><span class='tstring_end'>'</span></span> <span class='comment'># optional riak_search additions
-</span>
-<span class='comment'># Create a client, specifying the Solr-compatible endpoint
-</span><span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Riak</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span> <span class='symbol'>:solr</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/solr</span><span class='tstring_end'>&quot;</span></span>
+<div class="highlight"><pre><span class="nb">require</span> <span class="s1">'ripple'</span>
 
-<span class='comment'># Search the default index for documents
-</span><span class='id result'>result</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id search'>search</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>title:Yesterday</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># Returns a vivified JSON object
-</span>                                          <span class='comment'># containing 'responseHeaders' and 'response' keys
-</span><span class='id result'>result</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>response</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>numFound</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='comment'># total number of results
-</span><span class='id result'>result</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>response</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>start</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>    <span class='comment'># offset into the total result set
-</span><span class='id result'>result</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>response</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>docs</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>     <span class='comment'># the list of indexed documents
-</span>
-<span class='comment'># Search the 'users' index for documents
-</span><span class='id client'>client</span><span class='period'>.</span><span class='id search'>search</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>users</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name:Sean</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class="c1"># Documents are stored as JSON objects in Riak but have rich</span>
+<span class="c1"># semantics, including validations and associations.</span>
+<span class="k">class</span> <span class="nc">Email</span>
+  <span class="kp">include</span> <span class="ss">Ripple</span><span class="p">:</span><span class="ss">:Document</span>
+  <span class="n">property</span> <span class="ss">:from</span><span class="p">,</span>    <span class="nb">String</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">property</span> <span class="ss">:to</span><span class="p">,</span>      <span class="nb">String</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">property</span> <span class="ss">:sent</span><span class="p">,</span>    <span class="no">Time</span><span class="p">,</span>   <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="nb">proc</span> <span class="p">{</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="p">}</span>
+  <span class="n">property</span> <span class="ss">:body</span><span class="p">,</span>    <span class="nb">String</span>
+<span class="k">end</span>
 
-<span class='comment'># Add a document to an index
-</span><span class='id client'>client</span><span class='period'>.</span><span class='id index'>index</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>users</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sean@basho.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Sean Cribbs</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='comment'># adds to the 'users' index
-</span>
-<span class='id client'>client</span><span class='period'>.</span><span class='id index'>index</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>index.html</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:content</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello, world!</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='comment'># adds to the default index
-</span>
-<span class='id client'>client</span><span class='period'>.</span><span class='id index'>index</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='int'>1</span><span class='comma'>,</span> <span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>one</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='int'>2</span><span class='comma'>,</span> <span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>two</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='comment'># adds multiple docs
-</span>
-<span class='comment'># Remove document(s) from an index
-</span><span class='id client'>client</span><span class='period'>.</span><span class='id remove'>remove</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='int'>1</span><span class='rbrace'>}</span><span class='rparen'>)</span>             <span class='comment'># removes the document with ID 1
-</span><span class='id client'>client</span><span class='period'>.</span><span class='id remove'>remove</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='symbol'>:query</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>archived</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='comment'># removes all documents matching query
-</span><span class='id client'>client</span><span class='period'>.</span><span class='id remove'>remove</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='int'>1</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='int'>5</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='comment'># removes multiple docs
-</span>
-<span class='id client'>client</span><span class='period'>.</span><span class='id remove'>remove</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>users</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sean@basho.com</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='comment'># removes from the 'users' index
-</span>
-<span class='comment'># Seed MapReduce with search results
-</span><span class='const'>Riak</span><span class='op'>::</span><span class='const'>MapReduce</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id client'>client</span><span class='rparen'>)</span><span class='period'>.</span>
-        <span class='id search'>search</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>users</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email:basho</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
-        <span class='id map'>map</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Riak.mapValuesJson</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:keep</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span>
-        <span class='id run'>run</span>
+<span class="n">email</span> <span class="o">=</span> <span class="no">Email</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"37458abc752f8413e"</span><span class="p">)</span>  <span class="c1"># GET /riak/emails/37458abc752f8413e</span>
+<span class="n">email</span><span class="o">.</span><span class="n">from</span> <span class="o">=</span> <span class="s2">"someone@nowhere.net"</span>
+<span class="n">email</span><span class="o">.</span><span class="n">save</span>                               <span class="c1"># PUT /riak/emails/37458abc752f8413e</span>
 
-<span class='comment'># Detect whether a bucket has auto-indexing
-</span><span class='id client'>client</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id is_indexed?'>is_indexed?</span>
+<span class="n">reply</span> <span class="o">=</span> <span class="no">Email</span><span class="o">.</span><span class="n">new</span>
+<span class="n">reply</span><span class="o">.</span><span class="n">from</span> <span class="o">=</span> <span class="s2">"justin@bashoooo.com"</span>
+<span class="n">reply</span><span class="o">.</span><span class="n">to</span>   <span class="o">=</span> <span class="s2">"sean@geeemail.com"</span>
+<span class="n">reply</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="s2">"Riak is a good fit for scalable Ruby apps."</span>
+<span class="n">reply</span><span class="o">.</span><span class="n">save</span>                               <span class="c1"># POST /riak/emails (Riak-assigned key)</span>
 
-<span class='comment'># Enable auto-indexing on a bucket
-</span><span class='id client'>client</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id enable_index!'>enable_index!</span>
+<span class="c1"># Documents can contain embedded documents, and link to other standalone documents </span>
+<span class="c1"># via associations using the many and one class methods.</span>
+<span class="k">class</span> <span class="nc">Person</span>
+  <span class="kp">include</span> <span class="ss">Ripple</span><span class="p">:</span><span class="ss">:Document</span>
+  <span class="n">property</span> <span class="ss">:name</span><span class="p">,</span> <span class="nb">String</span>
+  <span class="n">many</span> <span class="ss">:addresses</span>
+  <span class="n">many</span> <span class="ss">:friends</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s2">"Person"</span>
+  <span class="n">one</span> <span class="ss">:account</span>
+<span class="k">end</span>
 
-<span class='comment'># Disable auto-indexing on a bucket
-</span><span class='id client'>client</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id disable_index!'>disable_index!</span>
-</pre><h2>Document Model Examples</h2>
-<pre class="code">
-<span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ripple</span><span class='tstring_end'>'</span></span>
+<span class="c1"># Account and Address are embeddable documents</span>
+<span class="k">class</span> <span class="nc">Account</span>
+  <span class="kp">include</span> <span class="ss">Ripple</span><span class="p">:</span><span class="ss">:EmbeddedDocument</span>
+  <span class="n">property</span> <span class="ss">:paid_until</span><span class="p">,</span> <span class="no">Time</span>
+  <span class="n">embedded_in</span> <span class="ss">:person</span> <span class="c1"># Adds "person" method to get parent document</span>
+<span class="k">end</span>
 
-<span class='comment'># Documents are stored as JSON objects in Riak but have rich
-</span><span class='comment'># semantics, including validations and associations.
-</span><span class='kw'>class</span> <span class='const'>Email</span>
-  <span class='id include'>include</span> <span class='const'>Ripple</span><span class='op'>::</span><span class='const'>Document</span>
-  <span class='id property'>property</span> <span class='symbol'>:from</span><span class='comma'>,</span>    <span class='const'>String</span><span class='comma'>,</span> <span class='symbol'>:presence</span> <span class='op'>=&gt;</span> <span class='kw'>true</span>
-  <span class='id property'>property</span> <span class='symbol'>:to</span><span class='comma'>,</span>      <span class='const'>String</span><span class='comma'>,</span> <span class='symbol'>:presence</span> <span class='op'>=&gt;</span> <span class='kw'>true</span>
-  <span class='id property'>property</span> <span class='symbol'>:sent</span><span class='comma'>,</span>    <span class='const'>Time</span><span class='comma'>,</span>   <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='id proc'>proc</span> <span class='lbrace'>{</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='rbrace'>}</span>
-  <span class='id property'>property</span> <span class='symbol'>:body</span><span class='comma'>,</span>    <span class='const'>String</span>
-<span class='kw'>end</span>
+<span class="k">class</span> <span class="nc">Address</span>
+  <span class="kp">include</span> <span class="ss">Ripple</span><span class="p">:</span><span class="ss">:EmbeddedDocument</span>
+  <span class="n">property</span> <span class="ss">:street</span><span class="p">,</span> <span class="nb">String</span>
+  <span class="n">property</span> <span class="ss">:city</span><span class="p">,</span> <span class="nb">String</span>
+  <span class="n">property</span> <span class="ss">:state</span><span class="p">,</span> <span class="nb">String</span>
+  <span class="n">property</span> <span class="ss">:zip</span><span class="p">,</span> <span class="nb">String</span>
+<span class="k">end</span>
 
-<span class='id email'>email</span> <span class='op'>=</span> <span class='const'>Email</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>37458abc752f8413e</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>  <span class='comment'># GET /riak/emails/37458abc752f8413e
-</span><span class='id email'>email</span><span class='period'>.</span><span class='id from'>from</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>someone@nowhere.net</span><span class='tstring_end'>&quot;</span></span>
-<span class='id email'>email</span><span class='period'>.</span><span class='id save'>save</span>                               <span class='comment'># PUT /riak/emails/37458abc752f8413e
-</span>
-<span class='id reply'>reply</span> <span class='op'>=</span> <span class='const'>Email</span><span class='period'>.</span><span class='id new'>new</span>
-<span class='id reply'>reply</span><span class='period'>.</span><span class='id from'>from</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>justin@bashoooo.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id reply'>reply</span><span class='period'>.</span><span class='id to'>to</span>   <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sean@geeemail.com</span><span class='tstring_end'>&quot;</span></span>
-<span class='id reply'>reply</span><span class='period'>.</span><span class='id body'>body</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Riak is a good fit for scalable Ruby apps.</span><span class='tstring_end'>&quot;</span></span>
-<span class='id reply'>reply</span><span class='period'>.</span><span class='id save'>save</span>                               <span class='comment'># POST /riak/emails (Riak-assigned key)
-</span>
-<span class='comment'># Documents can contain embedded documents, and link to other standalone documents 
-</span><span class='comment'># via associations using the many and one class methods.
-</span><span class='kw'>class</span> <span class='const'>Person</span>
-  <span class='id include'>include</span> <span class='const'>Ripple</span><span class='op'>::</span><span class='const'>Document</span>
-  <span class='id property'>property</span> <span class='symbol'>:name</span><span class='comma'>,</span> <span class='const'>String</span>
-  <span class='id many'>many</span> <span class='symbol'>:addresses</span>
-  <span class='id many'>many</span> <span class='symbol'>:friends</span><span class='comma'>,</span> <span class='symbol'>:class_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Person</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id one'>one</span> <span class='symbol'>:account</span>
-<span class='kw'>end</span>
+<span class="n">person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"adamhunter"</span><span class="p">)</span>
+<span class="n">person</span><span class="o">.</span><span class="n">friends</span> <span class="o">&lt;&lt;</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"seancribbs"</span><span class="p">)</span> <span class="c1"># Links to people/seancribbs with tag "friend"</span>
+<span class="n">person</span><span class="o">.</span><span class="n">addresses</span> <span class="o">&lt;&lt;</span> <span class="no">Address</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:street</span> <span class="o">=&gt;</span> <span class="s2">"100 Main Street"</span><span class="p">)</span> <span class="c1"># Adds an embedded address</span>
+<span class="n">person</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">paid_until</span> <span class="o">=</span> <span class="mi">3</span><span class="o">.</span><span class="n">months</span><span class="o">.</span><span class="n">from_now</span>
+</pre></div>
 
-<span class='comment'># Account and Address are embeddable documents
-</span><span class='kw'>class</span> <span class='const'>Account</span>
-  <span class='id include'>include</span> <span class='const'>Ripple</span><span class='op'>::</span><span class='const'>EmbeddedDocument</span>
-  <span class='id property'>property</span> <span class='symbol'>:paid_until</span><span class='comma'>,</span> <span class='const'>Time</span>
-  <span class='id embedded_in'>embedded_in</span> <span class='symbol'>:person</span> <span class='comment'># Adds &quot;person&quot; method to get parent document
-</span><span class='kw'>end</span>
+<h2>Configuration Example</h2>
 
-<span class='kw'>class</span> <span class='const'>Address</span>
-  <span class='id include'>include</span> <span class='const'>Ripple</span><span class='op'>::</span><span class='const'>EmbeddedDocument</span>
-  <span class='id property'>property</span> <span class='symbol'>:street</span><span class='comma'>,</span> <span class='const'>String</span>
-  <span class='id property'>property</span> <span class='symbol'>:city</span><span class='comma'>,</span> <span class='const'>String</span>
-  <span class='id property'>property</span> <span class='symbol'>:state</span><span class='comma'>,</span> <span class='const'>String</span>
-  <span class='id property'>property</span> <span class='symbol'>:zip</span><span class='comma'>,</span> <span class='const'>String</span>
-<span class='kw'>end</span>
-
-<span class='id person'>person</span> <span class='op'>=</span> <span class='const'>Person</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>adamhunter</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-<span class='id person'>person</span><span class='period'>.</span><span class='id friends'>friends</span> <span class='op'>&lt;&lt;</span> <span class='const'>Person</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>seancribbs</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># Links to people/seancribbs with tag &quot;friend&quot;
-</span><span class='id person'>person</span><span class='period'>.</span><span class='id addresses'>addresses</span> <span class='op'>&lt;&lt;</span> <span class='const'>Address</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:street</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>100 Main Street</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># Adds an embedded address
-</span><span class='id person'>person</span><span class='period'>.</span><span class='id account'>account</span><span class='period'>.</span><span class='id paid_until'>paid_until</span> <span class='op'>=</span> <span class='int'>3</span><span class='period'>.</span><span class='id months'>months</span><span class='period'>.</span><span class='id from_now'>from_now</span>
-</pre><h2>Configuration Example</h2>
 <p>When using Ripple with Rails 3, add ripple to your Gemfile and then run the <code>ripple</code> generator.  This will generate a test harness, some MapReduce functions and a configuration file. Example:</p>
-<pre class="code">
-$ rails g ripple
+
+<pre><code>$ rails g ripple
       create  config/ripple.yml
       create  app/mapreduce
       create  app/mapreduce/contrib.js
@@ -222,66 +125,93 @@ $ rails g ripple
       create  test/ripple_test_helper.rb
       insert  test/test_helper.rb
       insert  test/test_helper.rb
-</pre><p><code>config/ripple.yml</code> should contain your Riak connection information, and settings for the test server. Example:</p>
-<pre class="code">
-# Configure Riak connections for the Ripple library.
-development:
-  http_port: 8098
-  pb_port: 8087
-  host: localhost
+</code></pre>
 
-# The test environment has additional keys for configuring the
-# Riak::TestServer for your test/spec suite:
-#
-# * bin_dir specifies the path to the &quot;riak&quot; script that you use to
-#           start Riak (just the directory)
-# * js_source_dir specifies where your custom Javascript functions for
-#           MapReduce should be loaded from. Usually app/mapreduce.
-test:
-  http_port: 9000
-  pb_port: 9002
-  host: localhost
-  bin_dir: /usr/local/bin   # Default for Homebrew.
-  js_source_dir: &lt;%%= Rails.root + &quot;app/mapreduce&quot; %&gt;
+<p><code>config/ripple.yml</code> should contain your Riak connection information, and settings for the test server. Example:</p>
 
-production:
-  http_port: 8098
-  pb_port: 8087
-  host: localhost
-</pre><p><code>require 'ripple/railtie'</code> from your <code>config/application.rb</code> file to complete the integration.</p>
+<div class="highlight"><pre><span class="c1"># Configure Riak connections for the Ripple library.</span>
+<span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">http_port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">8098</span>
+  <span class="l-Scalar-Plain">pb_port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">8087</span>
+  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">127.0.0.1</span>
+
+<span class="c1"># The test environment has additional keys for configuring the</span>
+<span class="c1"># Riak::TestServer for your test/spec suite:</span>
+<span class="c1">#</span>
+<span class="c1"># * bin_dir specifies the path to the "riak" script that you use to</span>
+<span class="c1">#           start Riak (just the directory)</span>
+<span class="c1"># * js_source_dir specifies where your custom Javascript functions for</span>
+<span class="c1">#           MapReduce should be loaded from. Usually app/mapreduce.</span>
+<span class="l-Scalar-Plain">test</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">http_port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">9000</span>
+  <span class="l-Scalar-Plain">pb_port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">9002</span>
+  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">127.0.0.1</span>
+  <span class="l-Scalar-Plain">bin_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/usr/local/bin</span>   <span class="c1"># Default for Homebrew.</span>
+  <span class="l-Scalar-Plain">js_source_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">&lt;%%= Rails.root + "app/mapreduce" %&gt;</span>
+
+<span class="l-Scalar-Plain">production</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">http_port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">8098</span>
+  <span class="l-Scalar-Plain">pb_port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">8087</span>
+  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">127.0.0.1</span>
+</pre></div>
+
+<p><code>require 'ripple/railtie'</code> from your <code>config/application.rb</code> file to complete the integration.</p>
+
 <h2>How to Contribute</h2>
+
 <ul>
-	<li>Fork the project on <a href="http://github.com/seancribbs/ripple">Github</a>.  If you have already forked, use <code>git pull --rebase</code> to reapply your changes on top of the mainline. Example:
-  <pre class="code">$ git checkout master
-$ git pull --rebase seancribbs master</pre></li>
-	<li>Create a topic branch. If you&#8217;ve already created a topic branch, rebase it on top of changes from the mainline &#8220;master&#8221; branch. Examples:
-	<ul>
-		<li>New branch:
-  <pre class="code">$ git checkout -b topic</pre></li>
-		<li>Existing branch:
-  <pre class="code">$ git rebase master</pre></li>
-	</ul></li>
-	<li>Write an RSpec example or set of examples that demonstrate the necessity and validity of your changes. <strong>Patches without specs will most often be ignored. Just do it, you&#8217;ll thank me later.</strong> Documentation patches need no specs, of course.</li>
-	<li>Make your feature addition or bug fix. Make your specs and stories pass (green).</li>
-	<li>Run the suite using multiruby or rvm to ensure cross-version compatibility.</li>
-	<li>Cleanup any trailing whitespace in your code (try <code>whitespace-mode</code> in Emacs, or &#8220;Remove Trailing Spaces in Document&#8221; in the &#8220;Text&#8221; bundle in Textmate).</li>
-	<li>Commit, do not mess with Rakefile or <span class="caps">VERSION</span>.  If related to an existing issue in the <a href="http://github.com/seancribbs/ripple/issues">tracker</a>, include &#8220;Closes #X&#8221; in the commit message (where X is the issue number).</li>
-	<li>Send me a pull request.</li>
+<li>
+<p>Fork the project on <a href="http://github.com/basho/ripple">Github</a>.  If you have already forked, use <code>git pull --rebase</code> to reapply your changes on top of the mainline. Example:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>git checkout master
+<span class="nv">$ </span>git pull --rebase basho master
+</pre></div>
+</li>
+<li>
+<p>Create a topic branch. If you've already created a topic branch, rebase it on top of changes from the mainline "master" branch. Examples:</p>
+
+<ul>
+<li>
+<p>New branch:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>git checkout -b topic
+</pre></div>
+</li>
+<li>
+<p>Existing branch:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>git rebase master
+</pre></div>
+</li>
 </ul>
-<h2>License &amp; Copyright</h2>
-<p>Copyright &copy;2010 Sean Cribbs, Sonian Inc., and Basho Technologies, Inc.</p>
-<p>Licensed under the Apache License, Version 2.0 (the &#8220;License&#8221;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
-<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/<span class="caps">LICENSE</span>-2.0</a></p>
-<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &#8220;AS IS&#8221; <span class="caps">BASIS</span>, <span class="caps">WITHOUT</span> <span class="caps">WARRANTIES</span> OR <span class="caps">CONDITIONS</span> OF <span class="caps">ANY</span> <span class="caps">KIND</span>, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
-<h2>Auxillary Licenses</h2>
-<p>The included photo (spec/fixtures/cat.jpg) is Copyright &copy;2009 <a href="http://seancribbs.com/">Sean Cribbs</a>, and is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0">Creative Commons Attribution Non-Commercial 3.0</a> license. <img src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" alt="" /></p>
-<p>The &#8220;Poor Man&#8217;s Fibers&#8221; implementation (lib/riak/util/fiber1.8.rb) is Copyright &copy;2008 Aman Gupta.</p></div></div>
+</li>
+<li><p>Write an RSpec example or set of examples that demonstrate the necessity and validity of your changes. <strong>Patches without specs will most often be ignored. Just do it, you'll thank me later.</strong> Documentation patches need no specs, of course.</p></li>
+<li><p>Make your feature addition or bug fix. Make your specs and stories pass (green).</p></li>
+<li><p>Run the suite using multiruby or rvm to ensure cross-version compatibility.</p></li>
+<li><p>Cleanup any trailing whitespace in your code (try @whitespace-mode@ in Emacs, or "Remove Trailing Spaces in Document" in the "Text" bundle in Textmate).</p></li>
+<li><p>Commit, do not mess with Rakefile or VERSION.  If related to an existing issue in the <a href="http://github.com/basho/ripple/issues">tracker</a>, include "Closes #X" in the commit message (where X is the issue number).</p></li>
+<li><p>Send me a pull request.</p></li>
+</ul><h2>License &amp; Copyright</h2>
+
+<p>Copyright ©2010-2012 Sean Cribbs and Basho Technologies, Inc.</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ripple: Riak on Rails maintained by <a href="https://github.com/bkerley">bkerley</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
     
-    <div id="footer">
-  Generated on Tue Jul 26 11:05:48 2011 by 
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.9.2).
-</div>
 
   </body>
 </html>
