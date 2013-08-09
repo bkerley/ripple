@@ -6,10 +6,10 @@ module ApplicationHelper
     end
   end
 
-  def snippet(name)
+  def snippet(name, lexer = :ruby)
     path = Rails.root + 'snippets' + name
     data = File.read path
-    highlit = Pygments.highlight data, lexer: :ruby
+    highlit = Pygments.highlight data, lexer: lexer
     Haml::Helpers.preserve(highlit)
   end
 end
