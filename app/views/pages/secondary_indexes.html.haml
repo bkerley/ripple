@@ -19,3 +19,58 @@
     You can define secondary indexes directly on properties:
 
     #{snippet 'vehicle_2i_def.rb'}
+
+  = source_dive do
+    :markdown
+      The `index` method for defining composite indexes is in
+      [`indexes.rb`](https://github.com/basho/ripple/blob/master/lib/ripple/indexes.rb#L32).
+
+  :markdown
+    If you want a composite index, you can also use a block to define the index:
+
+    #{snippet 'timeseries_2i_block.rb'}
+
+    Block-defined indexes aren't restricted to properties; they can also invoke
+    other instance methods, and pull in information from associated or embedded
+    documents. 
+
+    ## Design
+
+    If you need to index on a single property, i.e. email address for a user
+    record or UPC for inventory at a pet store, design is easy.
+
+    Designing composite indexes is more difficult. You have to know up front
+    what queries you'll need to make, which might mean you'll need to know up
+    front how the application will be structured and used.
+
+    ### Composition
+
+    Let's say we have a database of books. One of the features we want is to
+    list an author's work in a timeline:
+
+    #{snippet 'book_timeline_example.html.erb', :erb}
+
+    First, let's just add indexes on a couple properties:
+
+    #{snippet 'book_2i_wrong_indexes.rb'}
+
+    This allows us to range query for every book by every author
+    in a given time range, or query every book by a single author in random
+    order. In the former case, we then have to filter out all the books that
+    aren't by the author we care about, which is awful. The second case
+    requires us to sort the records after fetching them, which is also kind
+    of awful.
+
+  = source_dive do
+    :markdown
+      The `find_by` method is also in 
+      [`indexes.rb`](https://github.com/basho/ripple/blob/master/lib/ripple/indexes.rb#L84).
+
+  :markdown
+
+    #{snippet 'book_2i_better_indexes.rb'}
+
+    Now, we've made one index that covers both publish date and author. The
+    publish date is last, so it can be used to perform a range query, and
+    then we just have to fetch each record for the title. Assuming Riak 1.4,
+    we don't even have to sort!

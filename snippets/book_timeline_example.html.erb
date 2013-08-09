@@ -1,0 +1,10 @@
+<h1>Books by <%=h @author.name %> by Publish Order</h1>
+
+<table>
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.date %></td>
+      <td><%= book.title %></td>
+    </tr>
+  <% end %>
+</table>
