@@ -6,6 +6,13 @@ module ApplicationHelper
     end
   end
 
+  def wtheck(&blk)
+    content_tag :div, class: 'protip wtheck' do
+      content_tag(:h3, "What's that?") +
+      content_tag(:div, class: 'protip-content', &blk)
+    end
+  end
+
   def snippet(name, lexer = :ruby)
     path = Rails.root + 'snippets' + name
     data = File.read path

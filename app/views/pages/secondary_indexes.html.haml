@@ -34,6 +34,18 @@
     other instance methods, and pull in information from associated or embedded
     documents. 
 
+    ## Querying
+
+  = source_dive do
+    :markdown
+      The `find_by` method is also in 
+      [`indexes.rb`](https://github.com/basho/ripple/blob/master/lib/ripple/indexes.rb#L84).
+
+  :markdown
+    You can query a secondary index with the `find_by` method:
+
+    #{snippet 'query_2i.rb'}
+
     ## Design
 
     If you need to index on a single property, i.e. email address for a user
@@ -61,10 +73,13 @@
     requires us to sort the records after fetching them, which is also kind
     of awful.
 
-  = source_dive do
+  = wtheck do
     :markdown
-      The `find_by` method is also in 
-      [`indexes.rb`](https://github.com/basho/ripple/blob/master/lib/ripple/indexes.rb#L84).
+      ASCII has several characters designated to separate units, records,
+      groups, and files in data structures. They're generally not used on the
+      web, so they're relatively safe to use for separating parts of an index.
+      You should filter them out of user-provided fields that go into the 
+      index, which is left as an exercise for the reader.
 
   :markdown
 
