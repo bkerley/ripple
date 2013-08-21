@@ -20,8 +20,8 @@ class Vehicle
   def self.find_by_region_and_license(region, license)
     index_key = "#{region}-#{license}"
 
-    # find_by returns an array
-    candidates = find_by :region_license, index_key
+    # find_by_index returns an array
+    candidates = find_by_index :region_license, index_key
     return candidates.first
   end
 end

@@ -1,3 +1,3 @@
-Vehicle.find_by :license, 'OUTATIME'
+Vehicle.find_by_index :license, 'OUTATIME'
 
-Vehicle.find_by :license, 'MPH80'..'MPH89'
+Vehicle.find_by_index :license, 'MPH80'..'MPH89'
